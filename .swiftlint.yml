@@ -1,0 +1,62 @@
+# SwiftLint — проверка стиля и типичных ошибок.
+# Документация правил: https://realm.github.io/SwiftLint/rule-directory.html
+
+included:
+  - gitTask
+  - gitTaskTests
+  - gitTaskUITests
+
+excluded:
+  - DerivedData
+  - build
+  - .build
+
+# Правила, выключенные по умолчанию, которые мы включаем осознанно
+opt_in_rules:
+  - force_unwrapping              # `value!` — частая причина крашей
+  - implicitly_unwrapped_optional # `var x: String!` — то же самое
+  - fatal_error_message           # fatalError() без объяснения
+  - empty_count                   # `.isEmpty` вместо `.count == 0`
+  - empty_string                  # `.isEmpty` вместо `== ""`
+  - first_where                   # `.first(where:)` вместо `.filter{}.first`
+  - last_where
+  - contains_over_first_not_nil
+  - sorted_first_last             # `.min()`/`.max()` вместо `.sorted().first`
+  - toggle_bool                   # `flag.toggle()` вместо `flag = !flag`
+  - redundant_nil_coalescing
+  - explicit_init
+  - closure_spacing
+  - modifier_order
+  - vertical_whitespace_closing_braces
+  - yoda_condition
+  - private_swiftui_state         # @State должен быть private
+
+# Конфликтуют с SwiftFormat — форматирование отдаём ему
+disabled_rules:
+  - trailing_comma
+  - opening_brace
+
+line_length:
+  warning: 120
+  error: 160
+  ignores_comments: true
+  ignores_urls: true
+
+function_body_length:
+  warning: 50
+  error: 80
+
+type_body_length:
+  warning: 300
+  error: 400
+
+file_length:
+  warning: 400
+  error: 600
+
+identifier_name:
+  min_length: 2
+  excluded:
+    - id
+    - x
+    - y

@@ -1,0 +1,18 @@
+# SwiftFormat — автоматическое форматирование кода.
+# Запуск: make format   (или: swiftformat .)
+# Все опции: swiftformat --options
+
+--swiftversion 6.0
+--exclude DerivedData,build,.build
+
+--indent 4
+--maxwidth 120
+--wraparguments before-first
+--wrapparameters before-first
+--wrapcollections before-first
+
+# Убираем автогенерированные шапки «Created by ... on ...»
+--header strip
+
+--self remove
+--importgrouping testable-last
