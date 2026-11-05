@@ -188,10 +188,10 @@
 				};
 			};
 			buildConfigurationList = F6DDF00F309C7925005F4F3C /* Build configuration list for PBXProject "gitTask" */;
-			developmentRegion = en;
+			developmentRegion = ru;
 			hasScannedForEncodings = 0;
 			knownRegions = (
-				en,
+				ru,
 				Base,
 			);
 			mainGroup = F6DDF00B309C7925005F4F3C;

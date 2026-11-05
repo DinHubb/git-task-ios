@@ -8,10 +8,22 @@ final class AppLaunchUITests: XCTestCase {
     }
 
     @MainActor
-    func testAppLaunchesAndShowsRootScreen() {
+    func testAppLaunchesAndShowsTaskList() {
         let app = XCUIApplication()
         app.launch()
 
-        XCTAssertTrue(app.navigationBars["GitTask"].waitForExistence(timeout: 5))
+        XCTAssertTrue(app.navigationBars["Задачи"].waitForExistence(timeout: 5))
+        // Mock-репозиторий отвечает через 0,5 с — ждём, пока появится хотя бы одна задача.
+        XCTAssertTrue(app.staticTexts["Команда /mytasks: пагинация"].waitForExistence(timeout: 5))
+    }
+
+    @MainActor
+    func testTabsAreVisible() {
+        let app = XCUIApplication()
+        app.launch()
+
+        for tab in ["Задачи", "Статистика", "Профиль"] {
+            XCTAssertTrue(app.tabBars.buttons[tab].waitForExistence(timeout: 5), tab)
+        }
     }
 }

@@ -43,6 +43,7 @@ iOS-клиент для [GitTaskBot](https://github.com/Hadamot/GitTaskBot) — 
 gitTask/
 ├── App/                    # точка входа, сборка зависимостей (DI)
 ├── Core/
+│   ├── Common/             # общие типы для экранов: LoadState
 │   ├── Models/             # TaskItem, User, Priority, BoardColumn, Role
 │   ├── Data/               # протоколы Repository + Mock-реализации
 │   └── DesignSystem/       # цвета, бейджи, общие компоненты состояний
@@ -75,6 +76,9 @@ gitTask/
 | DI через инициализатор, без библиотек | понятно, тестируемо, без «магии» |
 | `TaskItem`, а не `Task` | `Task` — встроенный тип Swift Concurrency |
 | Модели и протоколы данных — `nonisolated` | их используют `actor`-репозитории вне главного потока |
+| Язык разработки проекта — `ru` | системные форматтеры (даты «вчера», «послезавтра») говорят по-русски |
+| Владелец ViewModel хранит её в `@State`, остальные получают через `let` | ViewModel не пересоздаётся при перерисовке |
+| Соответствие `nonisolated`-протоколам в тестах — через `extension` | иначе изоляция протокола переносится на тип |
 | `rawValue` enum'ов = строки бэкенда | JSON бота распарсится без ручного перевода |
 | В `Core/Models` и `Core/Data` нет `import SwiftUI` | данные не знают, как выглядят на экране |
 | Swift Testing для unit, XCTest для UI | новый фреймворк Apple; UI-тесты он пока не поддерживает |
@@ -112,8 +116,8 @@ TabView
 |---|--------|-------------|--------|
 | 0 | Окружение и каркас | Xcode, настройки проекта, SwiftLint, SwiftFormat, git | ✅ |
 | 1 | Модели и mock-данные | `struct`, `enum`, протоколы, `actor`, `async/await` | ✅ |
-| 2 | Список задач | MVVM, `@Observable`, `List`, `LoadState`, `TabView` | ⏳ |
-| 3 | Карточка задачи | `NavigationStack`, маршруты, смена статуса | |
+| 2 | Список задач | MVVM, `@Observable`, `List`, `LoadState`, `TabView` | ✅ |
+| 3 | Карточка задачи | `NavigationStack`, маршруты, смена статуса | ⏳ |
 | 4 | Фильтры и сортировка | `sheet`, `Picker`, чистые функции | |
 | 5 | Создание задачи | формы, валидация, многошаговый флоу | |
 | 6 | Профиль и роли | условный UI, `@AppStorage` | |

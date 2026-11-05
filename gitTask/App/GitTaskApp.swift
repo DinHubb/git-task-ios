@@ -7,9 +7,12 @@ import SwiftUI
 /// `body` возвращает одну или несколько сцен (`Scene`). `WindowGroup` — обычное окно iPhone.
 @main
 struct GitTaskApp: App {
+    /// Здесь выбирается источник данных для всего приложения.
+    private let container = AppContainer.mock()
+
     var body: some Scene {
         WindowGroup {
-            RootView()
+            RootView(container: container)
         }
     }
 }
